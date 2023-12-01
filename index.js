@@ -2,7 +2,7 @@ const express = require('express')
 const cors = require('cors')
 require('dotenv').config()
 const app = express()
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const port = process.env.PORT || 5000;
 
 // middlewire
@@ -41,6 +41,13 @@ async function run() {
       const newTea=req.body;
       console.log(newTea)
       const result =await teaCollection.insertOne(newTea);
+      res.send(result)
+    })
+
+    app.delete('/tea/:id',async(req,res)=>{
+      const id =req.params.id;
+      const query={_id :new ObjectId(id)}
+      const result =await teaCollection.deleteOne(query);
       res.send(result)
     })
     
