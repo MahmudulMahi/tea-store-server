@@ -27,12 +27,21 @@ async function run() {
 
     const teaCollection=client.db('teaDB').collection('tea')
 
+    // tarpor data paowar jonno get method korte hobe
+
+    app.get('/tea',async(req,res)=>{
+      const cursor=teaCollection.find();
+      const result =await cursor.toArray();
+      res.send(result)
+    })
+
     // prothome tea add korte hobe
     app.post('/tea',async(req,res)=>{
       // newtea holo from er data je name asbe
       const newTea=req.body;
       console.log(newTea)
-      const result =await teaCollection.insertOne(newtea);
+      const result =await teaCollection.insertOne(newTea);
+      res.send(result)
     })
     
     // Send a ping to confirm a successful connection
