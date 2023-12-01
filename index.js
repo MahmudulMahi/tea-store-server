@@ -25,12 +25,14 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
 
-    // prothome tea add korte hobe
+    const teaCollection=client.db('teaDB').collection('tea')
 
+    // prothome tea add korte hobe
     app.post('/tea',async(req,res)=>{
       // newtea holo from er data je name asbe
       const newTea=req.body;
       console.log(newTea)
+      const result =await teaCollection.insertOne(newtea);
     })
     
     // Send a ping to confirm a successful connection
