@@ -35,6 +35,14 @@ async function run() {
       res.send(result)
     })
 
+    // nirdisto kisu ke update korar jonno
+    app.get('/tea/:id',async(req,res)=>{
+      const id=req.params.id
+      const query={_id:new ObjectId(id)}
+      const result=await teaCollection.findOne(query)
+      res.send(result);
+    })
+
     // prothome tea add korte hobe
     app.post('/tea',async(req,res)=>{
       // newtea holo from er data je name asbe
