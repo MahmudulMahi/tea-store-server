@@ -52,6 +52,27 @@ async function run() {
       res.send(result)
     })
 
+    // update korar jonno
+    app.put('/tea/:id',async(req,res)=>{
+      const id=req.params.id
+      const filter={_id:new ObjectId(id)}
+      const options={upsert:true}
+      const updateTea=req.body
+      const tea={
+        $set:{
+          name:updateTea.name,
+          chef:updateTea.chef,
+          supplier:updateTea.supplier, 
+          taste:updateTea.taste, 
+          category:updateTea.category, 
+          details:updateTea.details, 
+          photo:updateTea.photo
+        }
+      }
+      const result=await teaCollection.updateOne(filter,tea,options)
+      res.send(result)
+    })
+
     app.delete('/tea/:id',async(req,res)=>{
       const id =req.params.id;
       const query={_id :new ObjectId(id)}
