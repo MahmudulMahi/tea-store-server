@@ -26,6 +26,7 @@ async function run() {
     await client.connect();
 
     const teaCollection=client.db('teaDB').collection('tea')
+    const userCollection=client.db('teaDB').collection('user')
 
     // tarpor data paowar jonno get method korte hobe
 
@@ -77,6 +78,14 @@ async function run() {
       const id =req.params.id;
       const query={_id :new ObjectId(id)}
       const result =await teaCollection.deleteOne(query);
+      res.send(result)
+    })
+
+    // user related apis
+    app.post('/user',async(req,res)=>{
+      const user=req.body
+      console.log(user)
+      const result=await userCollection.insertOne(user)
       res.send(result)
     })
     
